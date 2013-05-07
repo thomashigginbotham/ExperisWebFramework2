@@ -1,0 +1,125 @@
+/* ================================
+ * About This Style Sheet
+ * ================================ */
+ /* These styles are used by the readme.htm file in the root directory. Use
+  * them to gain an understanding of the basics, but bear in mind that
+  * this is only a demo, and your own styles should be placed in the
+  * appropriate style sheet in the "partials" directory. */
+
+ /* ================================
+ * Variables
+ * ================================ */
+$white: #fff;
+$light-gray: #eee;
+$dark-gray: #666;
+$red: #c00;
+
+ /* ================================
+ * Basic Styles
+ * ================================ */
+// Just some simple styling so the page doesn't look too bad
+body {
+	margin: 0 auto;
+	padding: 0 $col-gutter;
+	max-width: 960px;
+	line-height: $base-line-height;
+	font: $base-font-weight #{$base-font-size}/#{$base-line-height} Arial, Helvetica, $base-font-family;
+	tab-size: 4;
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+}
+header {
+	border-bottom: 1px solid $light-gray;
+}
+footer {
+	padding-top: $col-gutter;
+	border-top: 1px solid $light-gray;
+	text-align: center;
+}
+
+/* ================================
+ * Page Layout
+ * ================================ */
+main {
+	@include row;
+}
+// We have 2 columns in our row
+.main-content {
+	@include column(12);
+}
+.sidebar {
+	@include column(4);
+	padding-left: $col-gutter;
+	border-left: 1px solid $light-gray;
+
+	h1 {
+		margin-top: 2em;
+		font-size: 1.2em;
+	}
+}
+
+/* ================================
+ * Classes
+ * ================================ */
+// The first two code examples will display in a 2-column grid
+.code-examples {
+	@include grid(2);
+}
+.code-block {
+	margin-bottom: $col-gutter;
+	padding: $col-gutter;
+	background-color: $light-gray;
+}
+// The descriptions of EWF's layouts will display in a 2-column grid
+.quick-ref-summaries {
+	@include grid(2);
+}
+// The feature boxes example uses a 3-column grid
+.feature-boxes {
+	@include grid(3);
+
+	.feature {
+		padding: $col-gutter;
+		color: $white;
+		background-color: $dark-gray;
+	}
+}
+
+/* ================================
+ * Responsive Design
+ * ================================ */
+@media (max-width: 860px) {
+	// Sidebar moves to the bottom on small-screen devices
+	main {
+		@include convert-to-single-cols;
+	}
+	.sidebar {
+		padding-left: 0;
+		border-top: 1px solid $light-gray;
+		border-left-width: 0;
+
+		h1 {
+			margin-top: .67em;
+		}
+	}
+}
+@media (max-width: 640px) {
+	// The code examples and layout descriptions collapse to one column
+	.code-examples,
+	.quick-ref-summaries {
+		@include convert-to-single-cols;
+	}
+	// The feature boxes switch to a 2-column layout. Notice that we included
+	// the "summary" class this time to increase the CSS specificity so that
+	// we can override the previous grid setting.
+	.summary .feature-boxes {
+		@include grid(2);
+
+		&:before {
+			content: 'It\'s too cramped. Switching to a 2-column grid.';
+			display: block;
+			margin: .67em 0 1.3em;
+			color: $red;
+		}
+	}
+}

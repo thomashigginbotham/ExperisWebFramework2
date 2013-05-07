@@ -1,0 +1,21 @@
+/* ================================
+ * Global Variables
+ * ================================ */
+// Add variables here that should be available throughout the site.
+// Override framework variables, such as $col-count, here too.
+
+/* ================================
+ * Partials
+ * ================================ */
+// Edit the Sass in the files below to your liking
+@import "partials/base";       // Basic variables and rules
+@import "partials/normalize";  // Browser resets <http://necolas.github.io/normalize.css/>
+@import "partials/grids";      // Layout and structure rules
+@import "partials/typography"; // Font rules
+@import "partials/theme";      // Color, background, and special effect rules
+
+/* ================================
+ * Third Party
+ * ================================ */
+ // These are styles from third parties, such as a jQuery plugin
+@import "vendor/demo"; // Styles used by the Readme file

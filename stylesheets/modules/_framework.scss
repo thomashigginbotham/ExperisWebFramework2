@@ -1,0 +1,153 @@
+/* ================================
+ * Global Variables
+ * ================================ */
+ // Override these in your _base.scss partial if necessary
+$page-max-width: 960px !default;
+$col-count: 16 !default;
+$col-gutter: 2% !default;
+
+/* ================================
+ * Functions
+ * ================================ */
+
+/*
+ * @function: get-width-without-gutters (number)
+ * Desc: Returns the width (%) of all columns/cells in a full-width block
+ *       excluding the gutters.
+ * $col-per-row: The number of columns/cells in the full-width block.
+ */
+@function get-width-without-gutters ($cols-per-row) {
+	@return 100 - (($cols-per-row - 1) * $col-gutter);
+}
+
+/*
+ * @function: get-column-width (number)
+ * Desc: Returns the width (%) of a cell based on the number of columns
+ *       it spans.
+ * $col-span: How many column lengths this cell will span across.
+ */
+@function get-column-width ($col-span) {
+	$single-col-width: (100 - ($col-count - 1) * $col-gutter) / $col-count;
+	@return $single-col-width * $col-span + ($col-span - 1) * $col-gutter;
+}
+
+/* ================================
+ * Mixins
+ * ================================ */
+
+/*
+ * @mixin: grid (number)
+ * Desc: Formats direct child elements as equal-width cells in a single-
+ *       or multi-row grid.
+ * $cols: The number of cells per row.
+ */
+@mixin grid ($cols) {
+	$first-column-cell: #{$cols}n-#{$cols - 1};
+	$last-column-cell: #{$cols}n;
+	$last-row: -n + #{$cols};
+
+	display: block;
+	box-sizing: border-box;
+
+	&:before {
+		content: '';
+		display: table;
+		line-height: 0;
+	}
+	&:after {
+		content: '';
+		display: table;
+		line-height: 0;
+		clear: both;
+	}
+	> * {
+		float: left;
+		box-sizing: border-box;
+		margin-right: $col-gutter;
+		margin-bottom: $col-gutter;
+		width: 1 / $cols * get-width-without-gutters($cols);
+
+		// Reset float clearing (in case this mixin is called more than once)
+		&:nth-child(n) {
+			clear: none;
+		}
+
+		// First cell of each row should clear cells above
+		&:nth-child(#{$first-column-cell}) {
+			clear: both;
+		}
+
+		// No right margin on last cell of each row
+		&:nth-child(#{$last-column-cell}) {
+			float: right;
+			margin-right: 0;
+		}
+
+		// No bottom margin on last row
+		&:nth-last-child(#{$last-row}) {
+			margin-bottom: 0;
+		}
+	}
+}
+
+/*
+ * @mixin: row
+ * Desc: Creates a full-width block that will act as a wrapper for a row
+ *       of cells.
+ */
+@mixin row () {
+	display: block;
+	box-sizing: border-box;
+
+	&:before {
+		content: '';
+		display: table;
+		line-height: 0;
+	}
+	&:after {
+		content: '';
+		display: table;
+		line-height: 0;
+		clear: both;
+	}
+}
+
+/*
+ * @mixin column (number)
+ * Desc: Formats element as a column within a row (expected to be a
+ *       direct descendent of row).
+ * $col-span: How many column lengths this cell will span across.
+ */
+@mixin column ($col-span) {
+	float: left;
+	box-sizing: border-box;
+	margin-right: $col-gutter;
+	width: get-column-width($col-span);
+
+	&:last-child {
+		float: right;
+		margin-right: 0;
+	}
+}
+
+/* @mixin center-column
+ * Desc: If a row contains a single column, it can be centered with this mixin.
+ *       Make sure to apply the column mixin first.
+ */
+@mixin center-column {
+	&:last-child {
+		float: none;
+		margin: 0 auto;
+	}
+}
+
+/* @mixin convert-to-single-cols
+ * Desc: Converts the columns in a row or grid to full-width columns.
+ */
+@mixin convert-to-single-cols {
+	> * {
+		margin: 1em 0 !important;
+		float: none !important;
+		width: 100% !important;
+	}
+}
