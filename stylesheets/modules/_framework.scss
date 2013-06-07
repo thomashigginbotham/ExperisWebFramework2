@@ -11,24 +11,27 @@ $col-gutter: 2% !default;
  * ================================ */
 
 /*
- * @function: get-width-without-gutters (number)
+ * @function: get-width-without-gutters (number[, number])
  * Desc: Returns the width (%) of all columns/cells in a full-width block
  *       excluding the gutters.
  * $col-per-row: The number of columns/cells in the full-width block.
+ * $gutter-width (optional): Width (%) of gutters.
  */
-@function get-width-without-gutters ($cols-per-row) {
-	@return 100 - (($cols-per-row - 1) * $col-gutter);
+@function get-width-without-gutters ($cols-per-row, $gutter-width: $col-gutter) {
+	@return 100% - (($cols-per-row - 1) * $gutter-width);
 }
 
 /*
- * @function: get-column-width (number)
+ * @function: get-column-width (number[, number, number])
  * Desc: Returns the width (%) of a cell based on the number of columns
  *       it spans.
  * $col-span: How many column lengths this cell will span across.
+ * $custom-col-count (optional): The total number of columns in the row.
+ * $gutter-width (optional): Width (%) of gutters.
  */
-@function get-column-width ($col-span) {
-	$single-col-width: (100 - ($col-count - 1) * $col-gutter) / $col-count;
-	@return $single-col-width * $col-span + ($col-span - 1) * $col-gutter;
+@function get-column-width ($col-span, $custom-col-count: $col-count, $gutter-width: $col-gutter) {
+	$single-col-width: (100% - ($custom-col-count - 1) * $gutter-width) / $custom-col-count;
+	@return $single-col-width * $col-span + ($col-span - 1) * $gutter-width;
 }
 
 /* ================================
@@ -36,18 +39,20 @@ $col-gutter: 2% !default;
  * ================================ */
 
 /*
- * @mixin: grid (number)
+ * @mixin: grid (number[, number])
  * Desc: Formats direct child elements as equal-width cells in a single-
  *       or multi-row grid.
  * $cols: The number of cells per row.
+ * $gutter-width (optional): Width (%) of gutters.
  */
-@mixin grid ($cols) {
+@mixin grid ($cols, $gutter-width: $col-gutter) {
 	$first-column-cell: #{$cols}n-#{$cols - 1};
 	$last-column-cell: #{$cols}n;
 	$last-row: -n + #{$cols};
 
 	display: block;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 
 	&:before {
 		content: '';
@@ -63,9 +68,11 @@ $col-gutter: 2% !default;
 	> * {
 		float: left;
 		box-sizing: border-box;
-		margin-right: $col-gutter;
-		margin-bottom: $col-gutter;
-		width: 1 / $cols * get-width-without-gutters($cols);
+		-moz-box-sizing: border-box;
+
+		margin-right: $gutter-width;
+		margin-bottom: $gutter-width;
+		width: 1 / $cols * get-width-without-gutters($cols, $gutter-width);
 
 		// Reset float clearing (in case this mixin is called more than once)
 		&:nth-child(n) {
@@ -98,6 +105,7 @@ $col-gutter: 2% !default;
 @mixin row () {
 	display: block;
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
 
 	&:before {
 		content: '';
@@ -113,20 +121,27 @@ $col-gutter: 2% !default;
 }
 
 /*
- * @mixin column (number)
+ * @mixin column (number[, number, number])
  * Desc: Formats element as a column within a row (expected to be a
  *       direct descendent of row).
  * $col-span: How many column lengths this cell will span across.
+ * $custom-col-count (optional): The total number of columns in the row.
+ * $gutter-width (optional): Width (%) of gutters.
  */
-@mixin column ($col-span) {
+@mixin column ($col-span, $custom-col-count: $col-count, $gutter-width: $col-gutter) {
 	float: left;
 	box-sizing: border-box;
-	margin-right: $col-gutter;
-	width: get-column-width($col-span);
+	-moz-box-sizing: border-box;
+
+	margin-right: $gutter-width;
+	width: get-column-width($col-span, $custom-col-count, $gutter-width);
+
+	&:last-child {
+		margin-right: 0;
+	}
 
 	&:last-child {
 		float: right;
-		margin-right: 0;
 	}
 }
 
@@ -141,12 +156,13 @@ $col-gutter: 2% !default;
 	}
 }
 
-/* @mixin convert-to-single-cols
+/* @mixin convert-to-single-cols ([margin value])
  * Desc: Converts the columns in a row or grid to full-width columns.
+ * $margin (optional): The margins for the element
  */
-@mixin convert-to-single-cols {
+@mixin convert-to-single-cols ($margin: 1em 0) {
 	> * {
-		margin: 1em 0 !important;
+		margin: $margin !important;
 		float: none !important;
 		width: 100% !important;
 	}
