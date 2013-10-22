@@ -66,17 +66,15 @@ $col-gutter: 2% !default;
 		clear: both;
 	}
 	> * {
-		float: left;
-		box-sizing: border-box;
-		-moz-box-sizing: border-box;
-
-		margin-right: $gutter-width;
-		margin-bottom: $gutter-width;
-		width: 1 / $cols * get-width-without-gutters($cols, $gutter-width);
-
-		// Reset float clearing (in case this mixin is called more than once)
-		&:nth-child(n) {
+		&:nth-child(1n) {
 			clear: none;
+			float: left;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+
+			margin-right: $gutter-width;
+			margin-bottom: $gutter-width;
+			width: 1 / $cols * get-width-without-gutters($cols, $gutter-width);
 		}
 
 		// First cell of each row should clear cells above
@@ -137,11 +135,11 @@ $col-gutter: 2% !default;
 	width: get-column-width($col-span, $custom-col-count, $gutter-width);
 
 	&:last-child {
+		float: right;
 		margin-right: 0;
 	}
-
-	&:last-child {
-		float: right;
+	&:first-child:last-child {
+		float: left;
 	}
 }
 
@@ -158,7 +156,7 @@ $col-gutter: 2% !default;
 
 /* @mixin convert-to-single-cols ([margin value])
  * Desc: Converts the columns in a row or grid to full-width columns.
- * $margin (optional): The margins for the element
+ * $margin (optional): The margins for the child elements
  */
 @mixin convert-to-single-cols ($margin: 1em 0) {
 	> * {

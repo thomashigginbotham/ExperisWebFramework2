@@ -1,18 +1,43 @@
+<!--[if lte IE 8]><html class="lt-ie9"><![endif]-->
+<!--[if !(lte IE 8)]><!-->
 <!doctype html>
+<!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 	<head>
 		<title>Starter Page | Experis Web Framework 2</title>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<link rel="stylesheet" href="stylesheets/main.css"/>
+		<script data-main="javascripts/app" src="javascripts/lib/require.js"></script>
 
 		<!--[if lt IE 9]>
-		// Use Selectivizr <http://selectivizr.com/> for IE 6-8 suppport, or
-		// remove this comment to support only IE 9+.
+		<script src="javascripts/lib/html5shiv.js"></script>
 		<![endif]-->
 	</head>
 
 	<body>
-		<!-- Here's a bare-bones HTML file to get you started -->
+		<form action="#" method="post">
+			<div class="page-wrapper">
+				<header class="site-header">
+					<h1><a href="#">Site Name</a></h1>
+
+					<nav class="site-nav">
+						<ul>
+							<li><a href="#">Home</a></li>
+						</ul>
+					</nav>
+				</header>
+
+				<main>
+					<h1>Page Heading</h1>
+					<p>Page content goes here.</p>
+				</main>
+
+				<footer class="site-footer">
+					<p>Footer content goes here.</p>
+				</footer>
+			</div>
+			<!-- /.page-wrapper -->
+		</form>
 	</body>
 </html>

@@ -1,5 +1,10 @@
 /* ================================
- * Grids
+ * Grids and General Layouts
  * ================================ */
-// Add positioning and dimension rules here
-// E.g. margin, width, border-width, display...
+
+/* -- Framework -- */
+.page-wrapper {
+	margin: 0 auto;
+	max-width: $page-max-width;
+	font-size: 1.4em;
+}
