@@ -2,7 +2,7 @@
 ## EWF2
 #################
 
-*.sublime-
+*.sublime-*
 .sass-cache
 *.css
 app-built.js
