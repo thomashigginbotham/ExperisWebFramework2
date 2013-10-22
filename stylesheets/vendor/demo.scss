@@ -6,6 +6,9 @@
   * this is only a demo, and your own styles should be placed in the
   * appropriate style sheet in the "partials" directory. */
 
+@import "../partials/base";
+@import "../partials/typography";
+
  /* ================================
  * Variables
  * ================================ */
@@ -23,10 +26,12 @@ body {
 	padding: 0 $col-gutter;
 	max-width: 960px;
 	line-height: $base-line-height;
-	font: $base-font-weight #{$base-font-size}/#{$base-line-height} Arial, Helvetica, $base-font-family;
 	tab-size: 4;
 	-moz-tab-size: 4;
 	-o-tab-size: 4;
+}
+.page-wrapper {
+	font-size: 1.4em;
 }
 header {
 	border-bottom: 1px solid $light-gray;
@@ -43,6 +48,7 @@ footer {
 main {
 	@include row;
 }
+
 // We have 2 columns in our row
 .main-content {
 	@include column(12);

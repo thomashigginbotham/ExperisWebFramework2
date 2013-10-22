@@ -4,62 +4,63 @@
 		<title>Basic Information and Instructions | Experis Web Framework 2</title>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<link rel="stylesheet" href="stylesheets/main.css"/>
+		<link rel="stylesheet" href="stylesheets/vendor/demo.css"/>
 	</head>
 
 	<body>
-		<header><h1>Experis Web Framework 2</h1></header>
+		<div class="page-wrapper">
+			<header><h1>Experis Web Framework 2</h1></header>
 
-		<main>
-			<article class="main-content">
-				<h1>Introduction</h1>
-				<p>EWF 2 is a major improvement on the original Experis Web Framework, and we decided that the changes were significant enough to warrant a new version number. Therefore, EWF 2 will be managed as a separate project from the original.</p>
-				<p>The primary goal in version 2 was to allow the framework to integrate into any existing HTML without the need to add design-specific class names like “size-3” and “two-column.” With CSS pre-processors like Sass, we can now map common rules to any CSS selector through functions and mixins. For example, in the previous version of EWF, we would need to use a “three-column” class to organize elements into a 3-column grid layout. The framework CSS would apply styles to the “three-column” class, allowing you to reuse it wherever you like. But in EWF 2, we can apply the same styles to any HTML element, regardless of class name by referencing the element in Sass and using a mixin. Here’s an example.</p>
+			<main>
+				<article class="main-content">
+					<h1>Introduction</h1>
+					<p>EWF 2 is a major improvement on the original Experis Web Framework, and we decided that the changes were significant enough to warrant a new version number. Therefore, EWF 2 will be managed as a separate project from the original.</p>
+					<p>The primary goal in version 2 was to allow the framework to integrate into any existing HTML without the need to add design-specific class names like “size-3” and “two-column.” With CSS pre-processors like Sass, we can now map common rules to any CSS selector through functions and mixins. For example, in the previous version of EWF, we would need to use a “three-column” class to organize elements into a 3-column grid layout. The framework CSS would apply styles to the “three-column” class, allowing you to reuse it wherever you like. But in EWF 2, we can apply the same styles to any HTML element, regardless of class name by referencing the element in Sass and using a mixin. Here’s an example.</p>
 
-				<div class="code-examples">
-					<div class="code-block">
-						<div class="heading"><strong>HTML</strong></div>
+					<div class="code-examples">
+						<div class="code-block">
+							<div class="heading"><strong>HTML</strong></div>
 
 <pre><code>&lt;ul class=&quot;gallery&quot;&gt;
 	&lt;li&gt;Item 1&lt;/li&gt;
 	&lt;li&gt;Item 2&lt;/li&gt;
 	&lt;li&gt;Item 3&lt;/li&gt;
 &lt;/ul&gt;</code></pre>
-					</div>
+						</div>
 
-					<div class="code-block">
-						<div class="heading"><strong>Sass</strong></div>
+						<div class="code-block">
+							<div class="heading"><strong>Sass</strong></div>
 
 <pre><code>.gallery {
 	@include grid(3);
 }</code></pre>
-					</div>
-				</div> <!-- /.code-examples -->
+						</div>
+					</div> <!-- /.code-examples -->
 
-				<p>Notice that this method of laying out content keeps the design in the CSS, where it belongs, and no changes to the HTML are needed. Modifying the HTML to change design has been discouraged for a long time, but often, necessity and practicality outweigh best practice. Now, with EWF 2, that’s no longer the case.</p>
-				<p>Unfortunately, if you are not familiar with Sass, you may have some reading up to do. The previous version of EWF will still be available if you prefer the plain CSS approach, but we highly recommend giving Sass a try. The benefits that it offers are akin to switching from Notepad or TextEdit to a fully featured code editor like Visual Studio or Dreamweaver. Of course, Sass requires some education in order to be used to its fullest, but like an improved text editor, the advantages gained are well worth it.</p>
+					<p>Notice that this method of laying out content keeps the design in the CSS, where it belongs, and no changes to the HTML are needed. Modifying the HTML to change design has been discouraged for a long time, but often, necessity and practicality outweigh best practice. Now, with EWF 2, that’s no longer the case.</p>
+					<p>Unfortunately, if you are not familiar with Sass, you may have some reading up to do. The previous version of EWF will still be available if you prefer the plain CSS approach, but we highly recommend giving Sass a try. The benefits that it offers are akin to switching from Notepad or TextEdit to a fully featured code editor like Visual Studio or Dreamweaver. Of course, Sass requires some education in order to be used to its fullest, but like an improved text editor, the advantages gained are well worth it.</p>
 
-				<h1>Getting Started</h1>
-				<p>First, you’ll need to download the EWF 2 files from GitHub. If you’ve used the older version of EWF, you’ll notice that the file structure has changed. We are using recommendations from <a href="http://thesassway.com/beginner/how-to-structure-a-sass-project">The Sass Way</a> website. This is a highly organized way of managing Sass source files that allows everything to be compiled into a single CSS file, reducing the number of HTTP requests the browser will need to make. The article does a great job of <a href="http://thesassway.com/beginner/how-to-structure-a-sass-project">explaining the structure</a>, so we won’t repeat it here.</p>
-				<p>After downloading EWF 2, open index.htm in a Web browser to see some examples of the framework in action. Then play around with the Sass code in the <i>/stylesheets/vendor/_demo.scss</i> file to get a better feel for how it works. Make sure to compile your Sass code to see your changes. If you haven’t installed Sass or you are unsure where to start, there are plenty of good articles online. Here are a few.</p>
+					<h1>Getting Started</h1>
+					<p>First, you’ll need to download the EWF 2 files from GitHub. If you’ve used the older version of EWF, you’ll notice that the file structure has changed. We are using recommendations from <a href="http://thesassway.com/beginner/how-to-structure-a-sass-project">The Sass Way</a> website. This is a highly organized way of managing Sass source files that allows everything to be compiled into a single CSS file, reducing the number of HTTP requests the browser will need to make. The article does a great job of <a href="http://thesassway.com/beginner/how-to-structure-a-sass-project">explaining the structure</a>, so we won’t repeat it here.</p>
+					<p>After downloading EWF 2, open index.htm in a Web browser to see some examples of the framework in action. Then play around with the Sass code in the <i>/stylesheets/vendor/_demo.scss</i> file to get a better feel for how it works. Make sure to compile your Sass code to see your changes. If you haven’t installed Sass or you are unsure where to start, there are plenty of good articles online. Here are a few.</p>
 
-				<ul>
-					<li><a href="http://base.thomashigginbotham.com/using-sass-in-windows/">http://base.thomashigginbotham.com/using-sass-in-windows/</a></li>
-					<li><a href="http://alistapart.com/article/getting-started-with-sass">http://alistapart.com/article/getting-started-with-sass</a></li>
-					<li><a href="http://thesassway.com/beginner/getting-started-with-sass-and-compass">http://thesassway.com/beginner/getting-started-with-sass-and-compass</a></li>
-				</ul>
+					<ul>
+						<li><a href="http://base.thomashigginbotham.com/using-sass-in-windows/">http://base.thomashigginbotham.com/using-sass-in-windows/</a></li>
+						<li><a href="http://alistapart.com/article/getting-started-with-sass">http://alistapart.com/article/getting-started-with-sass</a></li>
+						<li><a href="http://thesassway.com/beginner/getting-started-with-sass-and-compass">http://thesassway.com/beginner/getting-started-with-sass-and-compass</a></li>
+					</ul>
 
-				<p>Once you are comfortable updating the Sass code and are familiar with how the files are organized, remove the <code>@import &quot;vendor/demo&quot;;</code> line from the <i>/stylesheets/main.scss</i> file, and start editing the files in the <i>/stylesheets/partials</i> folder to meet your needs.</p>
+					<p>Once you are comfortable updating the Sass code and are familiar with how the files are organized, remove the <code>@import &quot;vendor/demo&quot;;</code> line from the <i>/stylesheets/main.scss</i> file, and start editing the files in the <i>/stylesheets/partials</i> folder to meet your needs.</p>
 
-				<h1>Quick Reference</h1>
-				<p>The primary purpose of a CSS framework is to provide the ability to quickly create flexible layouts without having to write a lot of low-level plumbing code. EWF 2 provides two major layout structures: Single-row Columns and Grids.</p>
+					<h1>Quick Reference</h1>
+					<p>The primary purpose of a CSS framework is to provide the ability to quickly create flexible layouts without having to write a lot of low-level plumbing code. EWF 2 provides two major layout structures: Single-row Columns and Grids.</p>
 
-				<section class="quick-ref-summaries">
-					<div class="summary">
-						<h2>Single-row Columns</h2>
-						<p>To create a row of columns, you will need a “wrapper” HTML element to act as the row, and its child elements will act as the columns. An example of your HTML may look like this:</p>
+					<section class="quick-ref-summaries">
+						<div class="summary">
+							<h2>Single-row Columns</h2>
+							<p>To create a row of columns, you will need a “wrapper” HTML element to act as the row, and its child elements will act as the columns. An example of your HTML may look like this:</p>
 
-						<div class="code-block">
+							<div class="code-block">
 <pre><code>&lt;main&gt;
 	&lt;article class=&quot;main-content&quot;&gt;
 		&lt;p&gt;...&lt;/p&gt;
@@ -69,11 +70,11 @@
 		&lt;p&gt;...&lt;/p&gt;
 	&lt;aside&gt;
 &lt;/main&gt;</code></pre>
-						</div>
+							</div>
 
-						<p>If we wanted to put our article on the left and the sidebar on the right, we would update the <i>_grids.scss</i> partial to look something like this:</p>
+							<p>If we wanted to put our article on the left and the sidebar on the right, we would update the <i>_grids.scss</i> partial to look something like this:</p>
 
-						<div class="code-block">
+							<div class="code-block">
 <pre><code>main {
 	@include row;
 }
@@ -84,18 +85,18 @@
 	@include column(4);
 }
 </code></pre>
-						</div>
+							</div>
 
-						<p>The &lt;main&gt; element is our row, so we include the “row” mixin. The &lt;article&gt; and &lt;aside&gt; elements are our columns, so we use the “column” mixin. We need to send a parameter to the “column” mixin that specifies its width. By default, columns can have any width from 1 to 16, but this can be changed by adding and setting the <var>$col-count</var> variable in the <i>_base.scss</i> partial.</p>
-						<p>The total width of the columns in a row should add up to 16 (or to whatever you have the <var>$col-count</var> variable set). In our example, our &lt;article&gt; element has a width of 12 and our &lt;aside&gt; element has a width of 4, which adds up to 16, as expected. If you add more columns to the row, you will need to verify that their widths still add up correctly.</p>
-					</div> <!-- /.summary -->
+							<p>The &lt;main&gt; element is our row, so we include the “row” mixin. The &lt;article&gt; and &lt;aside&gt; elements are our columns, so we use the “column” mixin. We need to send a parameter to the “column” mixin that specifies its width. By default, columns can have any width from 1 to 16, but this can be changed by adding and setting the <var>$col-count</var> variable in the <i>_base.scss</i> partial.</p>
+							<p>The total width of the columns in a row should add up to 16 (or to whatever you have the <var>$col-count</var> variable set). In our example, our &lt;article&gt; element has a width of 12 and our &lt;aside&gt; element has a width of 4, which adds up to 16, as expected. If you add more columns to the row, you will need to verify that their widths still add up correctly.</p>
+						</div> <!-- /.summary -->
 
-					<div class="summary">
-						<h2>Grids</h2>
-						<p>Grids are like the columns layout, except that each column will have the same width. The advantage is that grids can have multiple rows, and the syntax for creating a grid is much simpler. Here’s an example of a grid layout.</p>
+						<div class="summary">
+							<h2>Grids</h2>
+							<p>Grids are like the columns layout, except that each column will have the same width. The advantage is that grids can have multiple rows, and the syntax for creating a grid is much simpler. Here’s an example of a grid layout.</p>
 
-						<div class="code-block">
-							<div class="heading"><strong>HTML</strong></div>
+							<div class="code-block">
+								<div class="heading"><strong>HTML</strong></div>
 
 <pre><code>&lt;section class=&quot;feature-boxes&quot;&gt;
 	&lt;div class=&quot;feature&quot;&gt;Feature 1&lt;/div&gt;
@@ -105,52 +106,53 @@
 	&lt;div class=&quot;feature&quot;&gt;Feature 5&lt;/div&gt;
 	&lt;div class=&quot;feature&quot;&gt;Feature 6&lt;/div&gt;
 &lt;/section&gt;</code></pre>
-						</div>
+							</div>
 
-						<div class="code-block">
-							<div class="heading"><strong>Sass</strong></div>
+							<div class="code-block">
+								<div class="heading"><strong>Sass</strong></div>
 
 <pre><code>.feature-boxes {
 	@include grid(3);
 }
 </code></pre>
-						</div>
+							</div>
 
-						<p>In this example, a 2×3 grid will be created (2 rows and 3 columns). The “grid” mixin accepts a single parameter: the number of columns in each row.</p>
-						<p>Here’s how the above renders in your browser (with some light styling):</p>
+							<p>In this example, a 2×3 grid will be created (2 rows and 3 columns). The “grid” mixin accepts a single parameter: the number of columns in each row.</p>
+							<p>Here’s how the above renders in your browser (with some light styling):</p>
 
-						<section class="feature-boxes">
-							<div class="feature">Feature 1</div>
-							<div class="feature">Feature 2</div>
-							<div class="feature">Feature 3</div>
-							<div class="feature">Feature 4</div>
-							<div class="feature">Feature 5</div>
-							<div class="feature">Feature 6</div>
-						</section>
-					</div> <!-- /.summary -->
-				</section> <!-- /.quick-ref-summaries -->
+							<section class="feature-boxes">
+								<div class="feature">Feature 1</div>
+								<div class="feature">Feature 2</div>
+								<div class="feature">Feature 3</div>
+								<div class="feature">Feature 4</div>
+								<div class="feature">Feature 5</div>
+								<div class="feature">Feature 6</div>
+							</section>
+						</div> <!-- /.summary -->
+					</section> <!-- /.quick-ref-summaries -->
 
-				<h1>What’s Next?</h1>
-				<p>Get to work on building the next great website! The two layouts in the previous section should be enough to get you going. If you’re interested in responsive design, check out the media queries in the <i>/stylesheets/vendor/_demo.scss</i> style sheet. That’s the style sheet for this very page.</p>
-				<p>If you’ve found a bug, feel free to sign into GitHub and add an issue. All comments and suggestions are welcome.</p>
-			</article>
+					<h1>What’s Next?</h1>
+					<p>Get to work on building the next great website! The two layouts in the previous section should be enough to get you going. If you’re interested in responsive design, check out the media queries in the <i>/stylesheets/vendor/demo.scss</i> style sheet. That’s the style sheet for this very page.</p>
+					<p>If you’ve found a bug, feel free to sign into GitHub and add an issue. All comments and suggestions are welcome.</p>
+				</article>
 
-			<aside class="sidebar">
-				<h1>Supported Browsers</h1>
+				<aside class="sidebar">
+					<h1>Supported Browsers</h1>
 
-				<ul>
-					<li>Chrome</li>
-					<li>Firefox</li>
-					<li>Safari</li>
-					<li>IE 9+</li>
-				</ul>
+					<ul>
+						<li>Chrome</li>
+						<li>Firefox</li>
+						<li>Safari</li>
+						<li>IE 9+</li>
+					</ul>
 
-				<p>EWF 2 will work on IE 6–8 with some additional help from <a href="http://selectivizr.com/">Selectivizr</a>.</p>
-			</aside>
-		</main>
+					<p>EWF 2 will work on IE 6–8 with some additional help from <a href="http://selectivizr.com/">Selectivizr</a>.</p>
+				</aside>
+			</main>
 
-		<footer>
-			<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
-		</footer>
+			<footer>
+				<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"><img alt="Creative Commons License" src="http://i.creativecommons.org/l/by-sa/3.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</p>
+			</footer>
+		</div>
 	</body>
 </html>
