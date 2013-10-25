@@ -11,3 +11,18 @@ body {
 h1, h2, h3, h4, h5, h6, p {
 	margin-top: 0;
 }
+
+// Monospace font reset
+pre,
+code,
+kbd,
+samp,
+tt {
+	font-family: monospace, monospace;
+	font-size: .9em;
+}
+
+// No borders on <img>
+img {
+	border-width: 0;
+}
