@@ -1,12 +1,12 @@
 /* ================================
- * Main Scripts
- * ================================ */
+* Main Scripts
+* ================================ */
 
 define(['jquery'], function($) {
 	/* -- Use the following pattern for jQuery plugins -- */
 	$(function() {
 		/* -- Sample jQuery Plugin -- */
-		require(['jquery.sampleplugin'], function() {
+		require(['samplePlugin'], function() {
 			$('.page-wrapper').samplePlugin();
 		});
 	});

@@ -2,11 +2,11 @@
 ## EWF2
 #################
 
-*.sublime-*
 .sass-cache
+node_modules
+*.sublime-*
 *.css
-app-built.js
-
+javascripts/dist
 
 #################
 ## Eclipse

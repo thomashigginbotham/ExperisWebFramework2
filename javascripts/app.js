@@ -4,11 +4,11 @@
 
 /* -- Config -- */
 requirejs.config({
-	baseUrl: '/javascripts/lib',
+	baseUrl: 'javascripts',
 	paths: {
-		'app': '../app',
-		'jquery': 'jquery-1.10.2',
-		'selectivizr': 'selectivizr-min'
+		'jquery': 'lib/jquery-1.10.2',
+		'selectivizr': 'lib/selectivizr-min',
+		'samplePlugin': 'lib/jquery.sampleplugin'
 	},
 	shim: {
 		'selectivizr': ['jquery']
