@@ -1,6 +1,6 @@
 <!doctype html>
-<!--[if lte IE 8]><html class="lt-ie9"><![endif]-->
-<!--[if !(lte IE 8)]><!-->
+<!--[if lt IE 9]><html class="lt-ie9"><![endif]-->
+<!--[if !(lt IE 9)]><!-->
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <!--<![endif]-->
 	<head>
@@ -15,34 +15,34 @@
 	</head>
 
 	<body>
-		<form action="#" method="post">
-			<div class="page-wrapper">
-				<header class="site-header">
-					<h1><a href="#">Site Name</a></h1>
+		<div class="page-wrapper">
+			<header class="site-header">
+				<h1><a href="#">Site Name</a></h1>
 
-					<nav class="site-nav">
-						<ul>
-							<li><a href="#">Home</a></li>
-						</ul>
-					</nav>
-				</header>
+				<nav class="site-nav">
+					<ul>
+						<li><a href="#">Home</a></li>
+					</ul>
+				</nav>
+			</header>
 
-				<main>
+			<main>
+				<article>
 					<h1>Page Heading</h1>
 					<p>Page content goes here.</p>
-				</main>
+				</article>
+			</main>
 
-				<footer class="site-footer">
-					<p>Footer content goes here.</p>
-				</footer>
-			</div>
-			<!-- /.page-wrapper -->
-		</form>
+			<footer class="site-footer">
+				<p>Footer content goes here.</p>
+			</footer>
+		</div>
+		<!-- /.page-wrapper -->
 
 		<!-- Development JS include -->
-		<!--<script data-main="javascripts/app" src="javascripts/lib/require.js"></script>-->
+		<script data-main="javascripts/app" src="javascripts/lib/require.js"></script>
 
 		<!-- Production JS include -->
-		<script src="javascripts/dist/main.js"></script>
+		<!--<script src="javascripts/dist/main.js"></script>-->
 	</body>
 </html>
