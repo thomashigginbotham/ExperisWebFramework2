@@ -81,5 +81,5 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', ['compass:dev', 'requirejs']);
 	grunt.registerTask('prod', ['compass:dist', 'requirejs']);
-	grunt.registerTask('server', ['compass:dev', 'requirejs', 'connect', 'watch']);
+	grunt.registerTask('server', ['connect', 'watch']);
 };
