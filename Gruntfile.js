@@ -47,7 +47,7 @@ module.exports = function(grunt) {
 				files: ['stylesheets/**/*.scss'],
 				tasks: ['compass:dev'],
 				options: {
-					spawn: false,
+					spawn: true,
 					atBegin: true,
 					livereload: true
 				}
