@@ -4,6 +4,7 @@
 
 /* -- Framework -- */
 .page-wrapper {
+	@include grid-overlay(); // Remove this line to take away the grid overlay
 	margin: 0 auto;
 	max-width: $page-max-width;
 	font-size: 1.4em;
