@@ -165,3 +165,37 @@ $col-gutter: 2% !default;
 		width: 100% !important;
 	}
 }
+
+/* @mixin grid-overlay ([number, number, color value])
+ * Desc: Adds a repeating column overlay for checking grid alignment.
+ * $custom-col-count (optional): The total number of columns in the row.
+ * $gutter-width (optional): Width (%) of gutters.
+ * $overlay-color (optional): The color of the overlay columns
+ */
+@mixin grid-overlay ($custom-col-count: $col-count, $gutter-width: $col-gutter, $overlay-color: rgba(#f00, .1)) {
+	$column-width: get-column-width(1, $custom-col-count, $gutter-width);
+	$gradient-string: $overlay-color 0, $overlay-color $column-width;
+
+	@for $i from 1 to $custom-col-count {
+		$start-width: get-column-width($i, $custom-col-count, $gutter-width);
+		$end-width: get-column-width($i + 1, $custom-col-count, $gutter-width);
+		$gradient-string: $gradient-string, rgba(#fff, 0) $start-width, rgba(#fff, 0) $start-width + $gutter-width, $overlay-color $start-width + $gutter-width, $overlay-color $end-width;
+	}
+
+	position: relative;
+
+	&:before {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: -webkit-linear-gradient(left, $gradient-string);
+		background: -moz-linear-gradient(left, $gradient-string);
+		background: -o-linear-gradient(left, $gradient-string);
+		background: -ms-linear-gradient(left, $gradient-string);
+		background: unquote('linear-gradient(to right, #{$gradient-string})'); // Contains quotes to avoid accidental use of Compass linear-gradient function
+	}
+}
