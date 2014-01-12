@@ -70,7 +70,8 @@ main {
  * ================================ */
 // The first two code examples will display in a 2-column grid
 .code-examples {
-	@include grid(2);
+	@include grid(2, get-child-gutters(12));
+	margin-bottom: 1em;
 }
 .code-block {
 	margin-bottom: $col-gutter;
@@ -79,7 +80,7 @@ main {
 }
 // The descriptions of EWF's layouts will display in a 2-column grid
 .quick-ref-summaries {
-	@include grid(2);
+	@include grid(2, get-child-gutters(12));
 }
 // The feature boxes example uses a 3-column grid
 .feature-boxes {

@@ -1,7 +1,7 @@
 /* ================================
  * Global Variables
  * ================================ */
- // Override these in your _base.scss partial if necessary
+// Override these in your _base.scss partial if necessary
 $page-max-width: 960px !default;
 $col-count: 16 !default;
 $col-gutter: 2% !default;
@@ -32,6 +32,19 @@ $col-gutter: 2% !default;
 @function get-column-width ($col-span, $custom-col-count: $col-count, $gutter-width: $col-gutter) {
 	$single-col-width: (100% - ($custom-col-count - 1) * $gutter-width) / $custom-col-count;
 	@return $single-col-width * $col-span + ($col-span - 1) * $gutter-width;
+}
+
+/*
+ * @function: get-child-gutters (number[, number, number])
+ * Desc: Returns the width (%) of a gutter to use that will be consistent with
+ *       the global gutter value even though the amount of space available
+ *       to the child elements is less than that of the full grid.
+ * $child-col-count: The number of columns available to the child element.
+ * $all-col-count (optional): The total number of columns in the full grid.
+ * $gutter-width (optional): The global width (%) of gutters.
+ */
+@function get-child-gutters ($child-col-count, $all-col-count: $col-count, $gutter-width: $col-gutter) {
+	@return $all-col-count / $child-col-count * $gutter-width;
 }
 
 /* ================================
