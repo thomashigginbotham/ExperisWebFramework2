@@ -52,58 +52,28 @@ $col-gutter: 2% !default;
  * ================================ */
 
 /*
- * @mixin: grid (number[, number])
- * Desc: Formats direct child elements as equal-width cells in a single-
- *       or multi-row grid.
- * $cols: The number of cells per row.
- * $gutter-width (optional): Width (%) of gutters.
+ * @mixin: clear-floats ([bool, bool])
+ * Desc: Adds ::before and/or ::after pseudo-selectors to an element to
+         clear previous and/or children floats
+ * $before (optional): Whether to clear previous floats (defaults to true)
+ * $after (optional): Whether to clear child floats (defaults to true)
  */
-@mixin grid ($cols, $gutter-width: $col-gutter) {
-	$first-column-cell: #{$cols}n-#{$cols - 1};
-	$last-column-cell: #{$cols}n;
-	$last-row: -n + #{$cols};
-
-	display: block;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
-
-	&:before {
-		content: '';
-		display: table;
-		line-height: 0;
-	}
-	&:after {
-		content: '';
-		display: table;
-		line-height: 0;
-		clear: both;
-	}
-	> * {
-		&:nth-child(1n) {
-			clear: none;
-			float: left;
-			box-sizing: border-box;
-			-moz-box-sizing: border-box;
-
-			margin-right: $gutter-width;
-			margin-bottom: $gutter-width;
-			width: 1 / $cols * get-width-without-gutters($cols, $gutter-width);
-		}
-
-		// First cell of each row should clear cells above
-		&:nth-child(#{$first-column-cell}) {
+@mixin clear-floats ($before: true, $after: true) {
+	@if ($before) {
+		&:before {
+			content: '';
+			display: table;
+			line-height: 0;
 			clear: both;
 		}
+	}
 
-		// No right margin on last cell of each row
-		&:nth-child(#{$last-column-cell}) {
-			float: right;
-			margin-right: 0;
-		}
-
-		// No bottom margin on last row
-		&:nth-last-child(#{$last-row}) {
-			margin-bottom: 0;
+	@if ($after) {
+		&:after {
+			content: '';
+			display: table;
+			line-height: 0;
+			clear: both;
 		}
 	}
 }
@@ -114,21 +84,11 @@ $col-gutter: 2% !default;
  *       of cells.
  */
 @mixin row () {
+	@include clear-floats;
+
 	display: block;
 	box-sizing: border-box;
 	-moz-box-sizing: border-box;
-
-	&:before {
-		content: '';
-		display: table;
-		line-height: 0;
-	}
-	&:after {
-		content: '';
-		display: table;
-		line-height: 0;
-		clear: both;
-	}
 }
 
 /*
@@ -176,6 +136,54 @@ $col-gutter: 2% !default;
 		margin: $margin !important;
 		float: none !important;
 		width: 100% !important;
+	}
+}
+
+/*
+ * @mixin: grid (number[, number])
+ * Desc: Formats direct child elements as equal-width cells in a single-
+ *       or multi-row grid.
+ * $cols: The number of cells per row.
+ * $gutter-width (optional): Width (%) of gutters.
+ */
+@mixin grid ($cols, $gutter-width: $col-gutter) {
+	$first-column-cell: #{$cols}n-#{$cols - 1};
+	$last-column-cell: #{$cols}n;
+	$last-row: -n + #{$cols};
+
+	@include row;
+
+	display: block;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+
+	> * {
+		&:nth-child(1n) {
+			clear: none;
+			float: left;
+			box-sizing: border-box;
+			-moz-box-sizing: border-box;
+
+			margin-right: $gutter-width;
+			margin-bottom: $gutter-width;
+			width: 1 / $cols * get-width-without-gutters($cols, $gutter-width);
+		}
+
+		// First cell of each row should clear cells above
+		&:nth-child(#{$first-column-cell}) {
+			clear: both;
+		}
+
+		// No right margin on last cell of each row
+		&:nth-child(#{$last-column-cell}) {
+			float: right;
+			margin-right: 0;
+		}
+
+		// No bottom margin on last row
+		&:nth-last-child(#{$last-row}) {
+			margin-bottom: 0;
+		}
 	}
 }
 
