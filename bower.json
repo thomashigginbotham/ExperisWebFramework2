@@ -8,6 +8,7 @@
 		"stylesheets/modules/_sprites-2x.scss",
 		"stylesheets/partials",
 		"stylesheets/vendor",
+		"stylesheets/main.scss",
 		".gitattributes",
 		".gitignore",
 		"config.rb",
