@@ -7,10 +7,10 @@
 		<title>Starter Page | Experis Web Framework 2</title>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<link rel="stylesheet" href="stylesheets/main.css"/>
+		<link rel="stylesheet" href="dist/stylesheets/main.css"/>
 
 		<!--[if lt IE 9]>
-		<script src="javascripts/lib/html5shiv.js"></script>
+		<script src="javascripts/lib/polyfills/html5shiv.js"></script>
 		<![endif]-->
 	</head>
 
@@ -47,9 +47,9 @@
 		<!-- /.page-wrapper -->
 
 		<!-- Development JS include -->
-		<script data-main="javascripts/app" src="javascripts/lib/require.js"></script>
+		<script data-main="javascripts/main" src="javascripts/lib/requirejs/require.js"></script>
 
 		<!-- Production JS include -->
-		<!--<script src="javascripts/dist/main.js"></script>-->
+		<!--<script src="dist/javascripts/app-built.js"></script>-->
 	</body>
 </html>

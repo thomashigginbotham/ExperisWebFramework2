@@ -4,9 +4,9 @@
 
 .sass-cache
 node_modules
+dist
 *.sublime-*
 *.css
-javascripts/dist
 
 #################
 ## Eclipse

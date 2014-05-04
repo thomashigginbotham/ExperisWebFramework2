@@ -7,14 +7,14 @@ module.exports = function(grunt) {
 			dist: {
 				options: {
 					sassDir: 'stylesheets',
-					cssDir: 'stylesheets',
+					cssDir: 'dist/stylesheets',
 					outputStyle: 'compressed'
 				}
 			},
 			dev: {
 				options: {
 					sassDir: 'stylesheets',
-					cssDir: 'stylesheets',
+					cssDir: 'dist/stylesheets',
 					outputStyle: 'expanded'
 				}
 			}
@@ -24,10 +24,10 @@ module.exports = function(grunt) {
 			compile: {
 				options: {
 					baseUrl: 'javascripts',
-					mainConfigFile: 'javascripts/app.js',
-					name: 'app',
-					out: 'javascripts/dist/main.js',
-					include: ['lib/require'],
+					mainConfigFile: 'javascripts/main.js',
+					name: 'main',
+					out: 'dist/javascripts/app-built.js',
+					include: ['lib/requirejs/require'],
 					findNestedDependencies: true,
 					optimize: 'uglify2',
 					generateSourceMaps: true,
@@ -53,11 +53,8 @@ module.exports = function(grunt) {
 				}
 			},
 			js: {
-				files: ['javascripts/app/*.js', 'javascripts/lib/*.js'],
-				tasks: ['requirejs'],
+				files: ['javascripts/**/*.js'],
 				options: {
-					spawn: false,
-					atBegin: true,
 					livereload: true
 				}
 			}
@@ -79,7 +76,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 
-	grunt.registerTask('default', ['compass:dev', 'requirejs']);
-	grunt.registerTask('prod', ['compass:dist', 'requirejs']);
-	grunt.registerTask('server', ['connect', 'watch']);
+ 	grunt.registerTask('default', ['connect', 'watch']);
+	grunt.registerTask('dist', ['compass:dist', 'requirejs']);
 };

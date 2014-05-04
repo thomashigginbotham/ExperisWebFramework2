@@ -1,21 +1,17 @@
 /* ================================
- * RequireJS Config and App Initialization
- * ================================ */
+* Application Scripts
+* ================================ */
+define(['jquery'], function($) {
+	/* -- Use the following pattern for jQuery plugins -- */
+	$(function() {
+		/* -- Sample jQuery Plugin -- */
+		require(['samplePlugin'], function() {
+			$('.page-wrapper').samplePlugin();
+		});
+	});
 
-/* -- Config -- */
-requirejs.config({
-	baseUrl: 'javascripts',
-	paths: {
-		'jquery': 'lib/jquery-1.10.2',
-		'selectivizr': 'lib/selectivizr-min',
-		'samplePlugin': 'lib/jquery.sampleplugin'
-	},
-	shim: {
-		'selectivizr': ['jquery']
-	},
-	// Remove the following to enable caching
-	'urlArgs': 'cachebust=' + new Date().getTime()
+	/* -- Add Selectivizr support for IE 6-8 <http://selectivizr.com/> -- */
+	if ($('.lt-ie9').length > 0) {
+		require(['selectivizr']);
+	}
 });
-
-/* -- Initialize App -- */
-requirejs(['app/main']);
