@@ -2,49 +2,41 @@
  * Global Variables
  * ================================ */
 // Override these in your _base.scss partial if necessary
-$page-max-width: 960px !default;
-$col-count: 16 !default;
-$col-gutter: 2% !default;
+$page-max-width: 960px !default;  // Maximum width of the page
+$col-count: 12 !default;          // Number of columns in the grid
+$col-gutter-fluid: 2.2% !default; // Column gutter width (as percentage for old browsers)
+$col-gutter: 1.4em !default;      // Column gutter width (for newer browsers)
 
 /* ================================
  * Functions
  * ================================ */
 
 /*
- * @function: get-width-without-gutters (number[, number])
- * Desc: Returns the width (%) of all columns/cells in a full-width block
- *       excluding the gutters.
- * $col-per-row: The number of columns/cells in the full-width block.
- * $gutter-width (optional): Width (%) of gutters.
- */
-@function get-width-without-gutters ($cols-per-row, $gutter-width: $col-gutter) {
-	@return 100% - (($cols-per-row - 1) * $gutter-width);
-}
-
-/*
- * @function: get-column-width (number[, number, number])
- * Desc: Returns the width (%) of a cell based on the number of columns
- *       it spans.
+ * @function: number get-column-width(number[, number, number])
+ * Desc: Returns the width of a cell based on the number of columns
+ *       it spans. WARNING: This function is only compatible with
+ *       fluid gutters.
  * $col-span: How many column lengths this cell will span across.
  * $custom-col-count (optional): The total number of columns in the row.
- * $gutter-width (optional): Width (%) of gutters.
+ * $custom-col-gutter (optional): Width (%) of gutters.
  */
-@function get-column-width ($col-span, $custom-col-count: $col-count, $gutter-width: $col-gutter) {
-	$single-col-width: (100% - ($custom-col-count - 1) * $gutter-width) / $custom-col-count;
-	@return $single-col-width * $col-span + ($col-span - 1) * $gutter-width;
+@function get-column-width($col-span, $custom-col-count: $col-count, $custom-col-gutter: $col-gutter-fluid) {
+	$single-col-width: (100% - ($custom-col-count - 1) * $custom-col-gutter) / $custom-col-count;
+
+	@return $single-col-width * $col-span + ($col-span - 1) * $custom-col-gutter;
 }
 
 /*
- * @function: get-child-gutters (number[, number, number])
+ * @function: number get-child-gutters(number[, number, number])
  * Desc: Returns the width (%) of a gutter to use that will be consistent with
  *       the global gutter value even though the amount of space available
  *       to the child elements is less than that of the full grid.
  * $child-col-count: The number of columns available to the child element.
  * $all-col-count (optional): The total number of columns in the full grid.
- * $gutter-width (optional): The global width (%) of gutters.
+ * $custom-col-gutter (optional): The global width (%) of gutters.
  */
-@function get-child-gutters ($child-col-count, $all-col-count: $col-count, $gutter-width: $col-gutter) {
-	@return $all-col-count / $child-col-count * $gutter-width;
+@function get-child-gutters($child-col-count, $all-col-count: $col-count, $custom-col-gutter: $col-gutter) {
+	@return $all-col-count / $child-col-count * $custom-col-gutter;
 }
 
 /* ================================
@@ -52,13 +44,13 @@ $col-gutter: 2% !default;
  * ================================ */
 
 /*
- * @mixin: clear-floats ([bool, bool])
+ * @mixin: clear-floats([bool, bool])
  * Desc: Adds ::before and/or ::after pseudo-selectors to an element to
          clear previous and/or children floats
  * $before (optional): Whether to clear previous floats (defaults to true)
  * $after (optional): Whether to clear child floats (defaults to true)
  */
-@mixin clear-floats ($before: true, $after: true) {
+@mixin clear-floats($before: true, $after: true) {
 	@if ($before) {
 		&:before {
 			content: '';
@@ -79,33 +71,51 @@ $col-gutter: 2% !default;
 }
 
 /*
- * @mixin: row
- * Desc: Creates a full-width block that will act as a wrapper for a row
- *       of cells.
+ * @mixin: column-width(number, [number, number])
+ * Desc: Provides a width for the specified number of columns to span
+ * $col-span: How many column lengths this cell will span across.
+ * $custom-col-count (optional): The total number of columns in the row.
+ * $custom-col-gutter (optional): Width of gutters.
  */
-@mixin row () {
-	@include clear-floats;
+@mixin column-width($col-span, $custom-col-count: $col-count, $custom-col-gutter: $col-gutter) {
+	// Old browsers must use fluid gutters
+	width: ((100% - ($custom-col-count - 1) * $col-gutter-fluid) / $custom-col-count) * $col-span + ($col-span - 1) * $col-gutter-fluid;
 
-	display: block;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
+	// New browsers can use fluid or fixed gutters
+	width: calc(((100% - (#{$custom-col-count} - 1) * #{$custom-col-gutter}) / #{$custom-col-count}) * #{$col-span} + (#{$col-span} - 1) * #{$custom-col-gutter});
 }
 
 /*
- * @mixin column (number[, number, number])
+ * @mixin: row()
+ * Desc: Creates a full-width block that will act as a wrapper for a row
+ *       of cells.
+ */
+@mixin row() {
+	@include clear-floats;
+
+	display: block;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+/*
+ * @mixin column(number[, number, number])
  * Desc: Formats element as a column within a row (expected to be a
  *       direct descendent of row).
  * $col-span: How many column lengths this cell will span across.
  * $custom-col-count (optional): The total number of columns in the row.
- * $gutter-width (optional): Width (%) of gutters.
+ * $custom-col-gutter (optional): Width of gutters.
  */
-@mixin column ($col-span, $custom-col-count: $col-count, $gutter-width: $col-gutter) {
-	float: left;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
+@mixin column($col-span, $custom-col-count: $col-count, $custom-col-gutter: $col-gutter) {
+	@include column-width($col-span, $custom-col-count, $custom-col-gutter);
 
-	margin-right: $gutter-width;
-	width: get-column-width($col-span, $custom-col-count, $gutter-width);
+	float: left;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+
+	margin-right: $custom-col-gutter;
 
 	&:last-child {
 		float: right;
@@ -116,22 +126,26 @@ $col-gutter: 2% !default;
 	}
 }
 
-/* @mixin center-column
+/* @mixin center-column(number, [number])
  * Desc: If a row contains a single column, it can be centered with this mixin.
- *       Make sure to apply the column mixin first.
+ * $col-span: How many column lengths this cell will span across.
+ * $custom-col-count (optional): The total number of columns in the row.
  */
-@mixin center-column {
-	&:last-child {
-		float: none;
-		margin: 0 auto;
-	}
+@mixin center-column($col-span, $custom-col-count: $col-count) {
+	@include column-width($col-span, $custom-col-count);
+
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+
+	margin: 0 auto;
 }
 
-/* @mixin convert-to-single-cols ([margin value])
+/* @mixin convert-to-single-cols([margin value])
  * Desc: Converts the columns in a row or grid to full-width columns.
- * $margin (optional): The margins for the child elements
+ * $margin (optional): The margins for each child element
  */
-@mixin convert-to-single-cols ($margin: 1em 0) {
+@mixin convert-to-single-cols($margin: 1em 0) {
 	> * {
 		margin: $margin !important;
 		float: none !important;
@@ -140,13 +154,13 @@ $col-gutter: 2% !default;
 }
 
 /*
- * @mixin: grid (number[, number])
+ * @mixin: grid(number[, number])
  * Desc: Formats direct child elements as equal-width cells in a single-
  *       or multi-row grid.
  * $cols: The number of cells per row.
- * $gutter-width (optional): Width (%) of gutters.
+ * $custom-col-gutter (optional): Width of gutters.
  */
-@mixin grid ($cols, $gutter-width: $col-gutter) {
+@mixin grid($cols, $custom-col-gutter: $col-gutter) {
 	$first-column-cell: #{$cols}n-#{$cols - 1};
 	$last-column-cell: #{$cols}n;
 	$last-row: -n + #{$cols};
@@ -154,19 +168,20 @@ $col-gutter: 2% !default;
 	@include row;
 
 	display: block;
-	box-sizing: border-box;
-	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
 
 	> * {
 		&:nth-child(1n) {
+			@include column-width(1, $cols, $custom-col-gutter);
 			clear: none;
 			float: left;
 			box-sizing: border-box;
 			-moz-box-sizing: border-box;
 
-			margin-right: $gutter-width;
-			margin-bottom: $gutter-width;
-			width: 1 / $cols * get-width-without-gutters($cols, $gutter-width);
+			margin-right: $custom-col-gutter;
+			margin-bottom: $custom-col-gutter;
 		}
 
 		// First cell of each row should clear cells above
@@ -187,20 +202,20 @@ $col-gutter: 2% !default;
 	}
 }
 
-/* @mixin grid-overlay ([number, number, color value])
+/* @mixin grid-overlay([number, number, color value])
  * Desc: Replaces an element's background with a grid for testing alignment.
  * $custom-col-count (optional): The total number of columns in the row.
- * $gutter-width (optional): Width (%) of gutters.
+ * $custom-col-gutter (optional): Width (%) of gutters.
  * $overlay-color (optional): The color of the overlay columns
  */
-@mixin grid-overlay ($custom-col-count: $col-count, $gutter-width: $col-gutter, $overlay-color: rgba(#777, .1)) {
-	$column-width: get-column-width(1, $custom-col-count, $gutter-width);
+@mixin grid-overlay($custom-col-count: $col-count, $custom-col-gutter: $col-gutter-fluid, $overlay-color: rgba(#777, .1)) {
+	$column-width: get-column-width(1, $custom-col-count, $custom-col-gutter);
 	$gradient-string: $overlay-color 0, $overlay-color $column-width;
 
 	@for $i from 1 to $custom-col-count {
-		$start-width: get-column-width($i, $custom-col-count, $gutter-width);
-		$end-width: get-column-width($i + 1, $custom-col-count, $gutter-width);
-		$gradient-string: $gradient-string, rgba(#fff, 0) $start-width, rgba(#fff, 0) $start-width + $gutter-width, $overlay-color $start-width + $gutter-width, $overlay-color $end-width;
+		$start-width: get-column-width($i, $custom-col-count, $custom-col-gutter);
+		$end-width: get-column-width($i + 1, $custom-col-count, $custom-col-gutter);
+		$gradient-string: $gradient-string, rgba(#fff, 0) $start-width, rgba(#fff, 0) $start-width + $custom-col-gutter, $overlay-color $start-width + $custom-col-gutter, $overlay-color $end-width;
 	}
 
 	background: -webkit-linear-gradient(left, $gradient-string);

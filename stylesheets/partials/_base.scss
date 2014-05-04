@@ -4,8 +4,8 @@
 /* -- Dimensions -- */
 $page-max-width: 960px;
 $page-margin: 20px;
-$col-count: 16;
-$col-gutter: 2%;
+$col-count: 12;
+$col-gutter: 1.4em;
 
 /* -- Break points -- */
 $large-canvas: 960px;
@@ -14,8 +14,8 @@ $small-canvas: 640px;
 $tiny-canvas: 480px;
 
 /* -- Colors -- */
-$white: #fff;
-$black: #000;
+$color-primary: #fff;
+$color-secondary: #000;
 
 /* ================================
  * Modules

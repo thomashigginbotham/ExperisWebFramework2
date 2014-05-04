@@ -13,10 +13,10 @@
  /* ================================
  * Variables
  * ================================ */
-$white: #fff;
-$light-gray: #eee;
-$dark-gray: #666;
-$red: #c00;
+$color-primary: #fff;
+$color-secondary: #eee;
+$color-secondary-dark: #666;
+$color-error: #c00;
 
  /* ================================
  * Basic Styles
@@ -32,11 +32,11 @@ body {
 	-o-tab-size: 4;
 }
 header {
-	border-bottom: 1px solid $light-gray;
+	border-bottom: 1px solid $color-secondary;
 }
 footer {
 	padding-top: $col-gutter;
-	border-top: 1px solid $light-gray;
+	border-top: 1px solid $color-secondary;
 	text-align: center;
 }
 
@@ -49,12 +49,12 @@ main {
 
 // We have 2 columns in our row
 .main-content {
-	@include column(12);
+	@include column(9);
 }
 .sidebar {
-	@include column(4);
+	@include column(3);
 	padding-left: $col-gutter;
-	border-left: 1px solid $light-gray;
+	border-left: 1px solid $color-secondary;
 
 	h1 {
 		margin-top: 2em;
@@ -67,17 +67,17 @@ main {
  * ================================ */
 // The first two code examples will display in a 2-column grid
 .code-examples {
-	@include grid(2, get-child-gutters(12));
+	@include grid(2);
 	margin-bottom: 1em;
 }
 .code-block {
 	margin-bottom: $col-gutter;
 	padding: $col-gutter;
-	background-color: $light-gray;
+	background-color: $color-secondary;
 }
 // The descriptions of EWF's layouts will display in a 2-column grid
 .quick-ref-summaries {
-	@include grid(2, get-child-gutters(12));
+	@include grid(2);
 }
 // The feature boxes example uses a 3-column grid
 .feature-boxes {
@@ -85,8 +85,8 @@ main {
 
 	.feature {
 		padding: $col-gutter;
-		color: $white;
-		background-color: $dark-gray;
+		color: $color-primary;
+		background-color: $color-secondary-dark;
 	}
 }
 
@@ -100,7 +100,7 @@ main {
 	}
 	.sidebar {
 		padding-left: 0;
-		border-top: 1px solid $light-gray;
+		border-top: 1px solid $color-secondary;
 		border-left-width: 0;
 
 		h1 {
@@ -124,7 +124,7 @@ main {
 			content: 'It\'s too cramped. Switching to a 2-column grid.';
 			display: block;
 			margin: .67em 0 1.3em;
-			color: $red;
+			color: $color-error;
 		}
 	}
 }

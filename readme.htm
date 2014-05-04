@@ -88,7 +88,7 @@
 	@include row;
 }
 .main-content {
-	@include column(12);
+	@include column(8);
 }
 .sidebar {
 	@include column(4);
@@ -96,8 +96,8 @@
 </code></pre>
 							</div>
 
-							<p>The &lt;main&gt; element is our row, so we include the “row” mixin. The &lt;article&gt; and &lt;aside&gt; elements are our columns, so we use the “column” mixin. We need to send a parameter to the “column” mixin that specifies its width. By default, columns can have any width from 1 to 16, but this can be changed by adding and setting the <var>$col-count</var> variable in the <i>_base.scss</i> partial.</p>
-							<p>The total width of the columns in a row should add up to 16 (or to whatever you have the <var>$col-count</var> variable set). In our example, our &lt;article&gt; element has a width of 12 and our &lt;aside&gt; element has a width of 4, which adds up to 16, as expected. If you add more columns to the row, you will need to verify that their widths still add up correctly.</p>
+							<p>The &lt;main&gt; element is our row, so we include the “row” mixin. The &lt;article&gt; and &lt;aside&gt; elements are our columns, so we use the “column” mixin. We need to send a parameter to the “column” mixin that specifies its width. By default, columns can have any width from 1 to 12, but this can be changed by adding and setting the <var>$col-count</var> variable in the <i>_base.scss</i> partial.</p>
+							<p>The total width of the columns in a row should add up to 12 (or to whatever you have the <var>$col-count</var> variable set). In our example, our &lt;article&gt; element has a width of 8 and our &lt;aside&gt; element has a width of 4, which adds up to 12, as expected. If you add more columns to the row, you will need to verify that their widths still add up correctly.</p>
 						</div> <!-- /.summary -->
 
 						<div class="summary">
