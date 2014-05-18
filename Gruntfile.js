@@ -1,4 +1,7 @@
 module.exports = function(grunt) {
+	// Load dependencies
+	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
 	// Configuration
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -6,15 +9,15 @@ module.exports = function(grunt) {
 		compass: {
 			dist: {
 				options: {
-					sassDir: 'stylesheets',
+					sassDir: 'app/stylesheets',
 					cssDir: 'dist/stylesheets',
 					outputStyle: 'compressed'
 				}
 			},
 			dev: {
 				options: {
-					sassDir: 'stylesheets',
-					cssDir: 'dist/stylesheets',
+					sassDir: 'app/stylesheets',
+					cssDir: '.tmp/stylesheets',
 					outputStyle: 'expanded'
 				}
 			}
@@ -23,8 +26,8 @@ module.exports = function(grunt) {
 		requirejs: {
 			compile: {
 				options: {
-					baseUrl: 'javascripts',
-					mainConfigFile: 'javascripts/main.js',
+					baseUrl: 'app/javascripts',
+					mainConfigFile: 'app/javascripts/main.js',
 					name: 'main',
 					out: 'dist/javascripts/app-built.js',
 					include: ['lib/requirejs/require'],
@@ -36,15 +39,23 @@ module.exports = function(grunt) {
 			}
 		},
 
+		copy: {
+			main: {
+				files: [
+					{expand: true, flatten: true, src: ['app/*'], dest: 'dist/', filter: 'isFile'}
+				]
+			}
+		},
+
 		watch: {
 			html: {
-				files: ['*.htm'],
+				files: ['app/**/*.html'],
 				options: {
 					livereload: true
 				}
 			},
 			css: {
-				files: ['stylesheets/**/*.scss'],
+				files: ['app/stylesheets/**/*.scss'],
 				tasks: ['compass:dev'],
 				options: {
 					spawn: true,
@@ -53,29 +64,28 @@ module.exports = function(grunt) {
 				}
 			},
 			js: {
-				files: ['javascripts/**/*.js'],
+				files: ['app/javascripts/**/*.js'],
 				options: {
 					livereload: true
 				}
 			}
 		},
 
-		connect: {
-			server: {
+		express: {
+			all: {
 				options: {
-					port: 9001,
-					base: './'
+					port: 9090,
+					hostname: '0.0.0.0',
+					bases: ['app', '.tmp'],
+					open: true,
+					livereload: true
 				}
 			}
 		}
 	});
 
 	// Tasks
-	grunt.loadNpmTasks('grunt-contrib-compass');
-	grunt.loadNpmTasks('grunt-contrib-requirejs');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-connect');
-
-	grunt.registerTask('default', ['connect', 'watch']);
-	grunt.registerTask('dist', ['compass:dist', 'requirejs']);
+	grunt.registerTask('default', ['compass:dev']);
+	grunt.registerTask('serve', ['compass:dev', 'express', 'watch']);
+	grunt.registerTask('dist', ['compass:dist', 'requirejs', 'copy']);
 };
