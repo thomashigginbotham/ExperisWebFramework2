@@ -24,7 +24,7 @@ $color-error: #c00;
 // Just some simple styling so the page doesn't look too bad
 body {
 	margin: 0 auto;
-	padding: 0 $col-gutter;
+	padding: 0 $col-gutter-fluid;
 	max-width: 960px;
 	line-height: $base-line-height;
 	tab-size: 4;
@@ -35,7 +35,7 @@ header {
 	border-bottom: 1px solid $color-secondary;
 }
 footer {
-	padding-top: $col-gutter;
+	padding-top: $col-gutter-fluid;
 	border-top: 1px solid $color-secondary;
 	text-align: center;
 }
@@ -53,7 +53,7 @@ main {
 }
 .sidebar {
 	@include column(3);
-	padding-left: $col-gutter;
+	padding-left: $col-gutter-fluid;
 	border-left: 1px solid $color-secondary;
 
 	h1 {
@@ -71,8 +71,8 @@ main {
 	margin-bottom: 1em;
 }
 .code-block {
-	margin-bottom: $col-gutter;
-	padding: $col-gutter;
+	margin-bottom: $col-gutter-fluid;
+	padding: $col-gutter-fluid;
 	background-color: $color-secondary;
 }
 // The descriptions of EWF's layouts will display in a 2-column grid
@@ -84,7 +84,7 @@ main {
 	@include grid(3);
 
 	.feature {
-		padding: $col-gutter;
+		padding: $col-gutter-fluid;
 		color: $color-primary;
 		background-color: $color-secondary-dark;
 	}

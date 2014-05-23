@@ -2,10 +2,10 @@
  * Global Variables
  * ================================ */
 // Override these in your _base.scss partial if necessary
-$page-max-width: 960px !default;  // Maximum width of the page
-$col-count: 12 !default;          // Number of columns in the grid
-$col-gutter-fluid: 2.2% !default; // Column gutter width (as percentage for old browsers)
-$col-gutter: 1.4em !default;      // Column gutter width (for newer browsers)
+$page-max-width: 960px !default;   // Maximum width of the page
+$col-count: 12 !default;           // Number of columns in the grid
+$col-gutter-fluid: 2.2% !default;  // Column gutter width (as percentage for old browsers)
+$col-gutter: 1.4rem !default;      // Column gutter width (for newer browsers)
 
 /* ================================
  * Functions
@@ -115,7 +115,8 @@ $col-gutter: 1.4em !default;      // Column gutter width (for newer browsers)
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
 
-	margin-right: $custom-col-gutter;
+	margin-right: $col-gutter-fluid;
+	margin-right: calc(#{$custom-col-gutter});
 
 	&:last-child {
 		float: right;
@@ -180,8 +181,10 @@ $col-gutter: 1.4em !default;      // Column gutter width (for newer browsers)
 			box-sizing: border-box;
 			-moz-box-sizing: border-box;
 
-			margin-right: $custom-col-gutter;
-			margin-bottom: $custom-col-gutter;
+			margin-right: $col-gutter-fluid;
+			margin-right: calc(#{$custom-col-gutter});
+			margin-bottom: $col-gutter-fluid;
+			margin-bottom: calc(#{$custom-col-gutter});
 		}
 
 		// First cell of each row should clear cells above
