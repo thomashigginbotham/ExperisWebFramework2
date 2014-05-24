@@ -1,7 +1,7 @@
 /* ================================
 * Application Scripts
 * ================================ */
-define(['jquery'], function($) {
+require(['jquery'], function($) {
 	/* -- Use the following pattern for jQuery plugins -- */
 	$(function() {
 		/* -- Sample jQuery Plugin -- */
@@ -11,7 +11,13 @@ define(['jquery'], function($) {
 	});
 
 	/* -- Add Selectivizr support for IE 6-8 <http://selectivizr.com/> -- */
-	if ($('.lt-ie9').length > 0) {
-		require(['selectivizr']);
-	}
+	(function() {
+		if ($('.lt-ie9').length > 0) {
+			var script = document.createElement('script');
+
+			script.src = '/javascripts/vendor/selectivizr.js';
+
+			document.getElementsByTagName('head')[0].appendChild(script);
+		}
+	})();
 });

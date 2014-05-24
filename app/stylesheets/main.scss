@@ -3,9 +3,6 @@
  * (Only contains imports)
  * ================================ */
 
-/* -- Third-party Vendor Styles -- */
-@import "vendor/normalize";    // Browser resets <http://necolas.github.io/normalize.css/>
-
 /* -- Partials -- */
 @import "partials/base";       // Basic variables and module imports
 @import "partials/resets";     // Overrides of browser default styles

@@ -4,14 +4,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <!--<![endif]-->
 	<head>
-		<title>Starter Page | Experis Web Framework 2</title>
+		<title>Starter Page</title>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<link rel="stylesheet" href="stylesheets/main.css"/>
+		<!-- build:remove -->
+		<link rel="stylesheet" href="/stylesheets/vendor/normalize.css"/>
+		<!-- /build -->
+		<link rel="stylesheet" href="/stylesheets/main.css"/>
 
 		<!--[if lt IE 9]>
-		<script src="javascripts/lib/polyfills/html5shiv.js"></script>
+		<script src="/javascripts/vendor/html5shiv.min.js"></script>
 		<![endif]-->
+
+		<!-- build:js /javascripts/built.js -->
+		<script data-main="/javascripts/main" src="/bower_components/requirejs/require.js"></script>
+		<!-- /build -->
 	</head>
 
 	<body>
@@ -21,7 +28,9 @@
 
 				<nav class="site-nav">
 					<ul>
-						<li><a href="#">Home</a></li>
+						<li><a href="#">Some</a></li>
+						<li><a href="#">Navigation</a></li>
+						<li><a href="#">Items</a></li>
 					</ul>
 				</nav>
 			</header>
@@ -29,27 +38,13 @@
 			<main>
 				<article>
 					<h1>Page Heading</h1>
-					<p>This is a simple starter page. Here are some things you might want to do first:</p>
-
-					<ul>
-						<li>View the <a href="readme.html">readme page</a>.</li>
-						<li>Edit this HTML markup to suit your needs.</li>
-						<li>Remove the grid overlay in <em>/stylesheets/partials/_grids.scss</em>.</li>
-						<li>Check out <em>/javascripts/app/main.js</em> to see how the red text at the bottom of the page was added.</li>
-					</ul>
+					<p>This is a simple starter page. Edit this HTML markup in <i>app/index.html</i> to suit your needs.</p>
 				</article>
 			</main>
 
 			<footer class="site-footer">
-				<p>Footer content goes here.</p>
+				<!-- Footer content here -->
 			</footer>
 		</div>
-		<!-- /.page-wrapper -->
-
-		<!-- Development JS include -->
-		<script data-main="javascripts/main" src="javascripts/lib/requirejs/require.js"></script>
-
-		<!-- Production JS include -->
-		<!--<script src="javascripts/app-built.js"></script>-->
 	</body>
 </html>

@@ -6,47 +6,99 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-		compass: {
-			dist: {
-				options: {
-					sassDir: 'app/stylesheets',
-					cssDir: 'dist/stylesheets',
-					outputStyle: 'compressed'
-				}
+		copy: {
+			dev: {
+				files: [
+					{
+						expand: true,
+						flatten: true,
+						src: ['app/bower_components/html5shiv/dist/html5shiv.min.js'],
+						dest: '.tmp/javascripts/vendor'
+					}, {
+						expand: true,
+						flatten: true,
+						src: ['app/bower_components/selectivizr/selectivizr.js'],
+						dest: '.tmp/javascripts/vendor'
+					}
+				]
 			},
+			dist: {
+				files: [
+					{
+						expand: true,
+						flatten: true,
+						src: ['app/bower_components/html5shiv/dist/html5shiv.min.js'],
+						dest: 'dist/javascripts/vendor'
+					}, {
+						expand: true,
+						flatten: true,
+						src: ['app/bower_components/selectivizr/selectivizr.js'],
+						dest: 'dist/javascripts/vendor'
+					}
+				]
+			}
+		},
+		clean: {
+			dev: ['.tmp'],
+			dist: ['.tmp', 'dist']
+		},
+		compass: {
 			dev: {
 				options: {
 					sassDir: 'app/stylesheets',
 					cssDir: '.tmp/stylesheets',
 					outputStyle: 'expanded'
 				}
-			}
-		},
-
-		requirejs: {
-			compile: {
+			},
+			dist: {
 				options: {
-					baseUrl: 'app/javascripts',
-					mainConfigFile: 'app/javascripts/main.js',
-					name: 'main',
-					out: 'dist/javascripts/app-built.js',
-					include: ['lib/requirejs/require'],
-					findNestedDependencies: true,
-					optimize: 'uglify2',
-					generateSourceMaps: true,
-					preserveLicenseComments: false
+					sassDir: 'app/stylesheets',
+					cssDir: '.tmp/stylesheets',
+					outputStyle: 'compressed'
 				}
 			}
 		},
-
-		copy: {
-			main: {
-				files: [
-					{expand: true, flatten: true, src: ['app/*'], dest: 'dist/', filter: 'isFile'}
-				]
+		cssmin: {
+			dist: {
+				files: {
+					'dist/stylesheets/main.css': ['app/bower_components/normalize-css/normalize.css', '.tmp/stylesheets/main.css']
+				}
 			}
 		},
-
+		requirejs: {
+			compile: {
+				options: {
+					baseUrl: './app/javascripts',
+					mainConfigFile: 'app/javascripts/main.js',
+					name: 'app',
+					out: 'dist/javascripts/built.js',
+					include: ['../bower_components/requirejs/require'],
+					findNestedDependencies: true,
+					optimize: 'uglify2',
+					generateSourceMaps: true,
+					preserveLicenseComments: false,
+				}
+			}
+		},
+		express: {
+			dev: {
+				options: {
+					port: 9090,
+					hostname: '0.0.0.0',
+					bases: ['app', '.tmp'],
+					open: true,
+					livereload: true
+				}
+			},
+			dist: {
+				options: {
+					port: 9091,
+					hostname: '0.0.0.0',
+					bases: ['dist'],
+					open: true
+				}
+			}
+		},
 		watch: {
 			html: {
 				files: ['app/**/*.html'],
@@ -58,8 +110,6 @@ module.exports = function(grunt) {
 				files: ['app/stylesheets/**/*.scss'],
 				tasks: ['compass:dev'],
 				options: {
-					spawn: true,
-					atBegin: true,
 					livereload: true
 				}
 			},
@@ -70,22 +120,17 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-
-		express: {
-			all: {
-				options: {
-					port: 9090,
-					hostname: '0.0.0.0',
-					bases: ['app', '.tmp'],
-					open: true,
-					livereload: true
+		processhtml: {
+			dist: {
+				files: {
+					'dist/index.html': ['app/index.html']
 				}
 			}
 		}
 	});
 
 	// Tasks
-	grunt.registerTask('default', ['compass:dev']);
-	grunt.registerTask('serve', ['compass:dev', 'express', 'watch']);
-	grunt.registerTask('dist', ['compass:dist', 'requirejs', 'copy']);
+	grunt.registerTask('default', ['clean:dist', 'copy:dist', 'compass:dist', 'cssmin', 'requirejs', 'processhtml']);
+	grunt.registerTask('serve', ['clean:dev', 'copy:dev', 'compass:dev', 'express:dev', 'watch']);
+	grunt.registerTask('dist-serve', ['clean:dist', 'copy:dist', 'compass:dist', 'cssmin', 'requirejs', 'processhtml', 'express:dist', 'express-keepalive']);
 };
