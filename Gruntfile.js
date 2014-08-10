@@ -90,6 +90,12 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		karma: {
+			unit: {
+				configFile: 'karma.conf.js',
+				background: true
+			}
+		},
 		express: {
 			dev: {
 				options: {
@@ -128,6 +134,10 @@ module.exports = function(grunt) {
 				options: {
 					livereload: true
 				}
+			},
+			karma: {
+				files: ['app/javascripts/lib/**/*.js', 'test/**/*.js'],
+				tasks: ['karma:unit:run']
 			}
 		},
 		processhtml: {
@@ -142,5 +152,6 @@ module.exports = function(grunt) {
 	// Tasks
 	grunt.registerTask('default', ['clean:dist', 'copy:dist', 'compass:dist', 'cssmin', 'requirejs', 'processhtml']);
 	grunt.registerTask('serve', ['clean:dev', 'copy:dev', 'compass:dev', 'express:dev', 'watch']);
+	grunt.registerTask('test-serve', ['clean:dev', 'copy:dev', 'compass:dev', 'karma:unit:start', 'express:dev', 'watch']);
 	grunt.registerTask('dist-serve', ['clean:dist', 'copy:dist', 'compass:dist', 'cssmin', 'requirejs', 'processhtml', 'express:dist', 'express-keepalive']);
 };
