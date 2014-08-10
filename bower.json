@@ -1,6 +1,6 @@
 {
   "name": "XWF",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "main": "app/stylesheets/modules/_framework.scss",
   "ignore": [
     "app/javascripts",

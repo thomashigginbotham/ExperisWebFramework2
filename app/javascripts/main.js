@@ -1,3 +1,5 @@
+/* global requirejs */
+
 /* ================================
  * RequireJS Config and App Initialization
  * ================================ */

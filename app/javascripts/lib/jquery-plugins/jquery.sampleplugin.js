@@ -1,7 +1,11 @@
+/* global define */
+
 /// <summary>
 /// A sample jQuery plugin
 /// </summary>
 define(['jquery'], function ($) {
+	'use strict';
+
 	$.fn.samplePlugin = function (options) {
 		var settings = $.extend({}, options);
 

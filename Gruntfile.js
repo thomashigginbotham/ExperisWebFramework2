@@ -1,4 +1,6 @@
 module.exports = function(grunt) {
+	'use strict';
+
 	// Load dependencies
 	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 

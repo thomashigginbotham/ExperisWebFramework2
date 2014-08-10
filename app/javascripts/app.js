@@ -1,7 +1,11 @@
+/* jslint browser: true */
+
 /* ================================
 * Application Scripts
 * ================================ */
 require(['jquery'], function($) {
+	'use strict';
+
 	/* -- Use the following pattern for jQuery plugins -- */
 	$(function() {
 		/* -- Sample jQuery Plugin -- */
