@@ -1,23 +1,42 @@
-/* ================================
- * Variables
- * ================================ */
-/* -- Dimensions -- */
+// Variables
+//
+// Styleguide 3.
+
+// Dimensions
+//
+// $page-max-width - The maximum width of the page.
+// $page-margin    - The left/right margin of the page.
+// $col-count      - The number of columns in the default grid.
+// $col-gutter     - The width of column gutters.
+//
+// Styleguide 3.1.
 $page-max-width: 960px;
 $page-margin: 20px;
 $col-count: 12;
 $col-gutter: 1.4rem;
 
-/* -- Break points -- */
+// Responsive Break Points
+//
+// $large-canvas  - The largest available break point.
+// $medium-canvas - A common break point for tablets.
+// $small-canvas  - A break point for small tablets and large phones.
+// $tiny-canvas   - The smallest break point.
+//
+// Styleguide 3.2.
 $large-canvas: 960px;
 $medium-canvas: 800px;
 $small-canvas: 640px;
 $tiny-canvas: 480px;
 
-/* -- Colors -- */
-$color-primary: #fff;
+// Colors
+//
+// $color-primary   - Hexadecimal value of the primary color.
+// $color-secondary - Hexadecimal value of the secondary color.
+// $color-text      - Hexadecimal value of the base text color.
+// $color-bg        - Hexadecimal value of the main background.
+//
+// Styleguide 3.3.
+$color-primary: #339;
 $color-secondary: #000;
-
-/* ================================
- * Modules
- * ================================ */
-@import "../modules/all";
+$color-text: #000;
+$color-bg: #fff;

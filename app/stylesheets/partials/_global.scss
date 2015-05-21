@@ -1,12 +1,17 @@
-/* ================================
- * Globally Available Classes
- * ================================ */
+// Globally Available Formatting Classes
+//
+// Styleguide 6.
 
-/* -- Alignment -- */
+// Alignment
+//
+// Compatibility untested.
+//
+// Styleguide 6.1
 .left {
 	float: left;
 	margin-right: $col-gutter;
 }
+
 .right {
 	float: right;
 	margin-left: $col-gutter;

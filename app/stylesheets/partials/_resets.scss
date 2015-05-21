@@ -1,20 +1,38 @@
-/* ================================
- * Default CSS Overrides
- * ================================ */
+// CSS Resets
+//
+// Styleguide 4.
 
+// Page Defaults
+//
+// Compatibility untested.
+//
+// Styleguide 4.1
 body {
 	margin: 0 $page-margin;
-	color: #000;
-	background-color: #fff;
+	color: $color-text;
+	background-color: $color-bg;
 }
 
-// No top margins on headers and paragraphs makes for easier
-// vertical alignment with other elements
-h1, h2, h3, h4, h5, h6, p {
+// Margins
+//
+// Compatibility untested.
+//
+// Styleguide 4.2.
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
 	margin-top: 0;
 }
 
-// Monospace font reset
+// Monospace Elements
+//
+// Compatibility untested.
+//
+// Styleguide 4.3.
 pre,
 code,
 kbd,
@@ -24,7 +42,11 @@ tt {
 	font-size: .9em;
 }
 
-// No borders on <img>
+// Images
+//
+// Compatibility untested.
+//
+// Styleguide 4.4.
 img {
 	border-width: 0;
 }
