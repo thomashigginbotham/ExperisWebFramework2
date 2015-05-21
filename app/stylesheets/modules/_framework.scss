@@ -211,6 +211,27 @@ $col-gutter: 1.4rem !default;
 	}
 }
 
+// Creates a row with an arbitrary number of columns where each column has the
+// same width.
+//
+// $custom-col-gutter - The width of the gutters.
+//
+// Compatibility untested.
+//
+// Styleguide 1.3.9.
+@mixin equal-width-columns($custom-col-gutter: $col-gutter) {
+	display: table;
+	table-layout: fixed;
+	border-spacing: $custom-col-gutter 0;
+	margin-left: -$custom-col-gutter;
+	width: calc(100% + #{$custom-col-gutter * 2});
+
+	> * {
+		display: table-cell;
+		width: 2%;
+	}
+}
+
 // Replaces an element's background with a grid for testing alignment.
 //
 // $custom-col-count  - The total number of columns in the row.
@@ -219,7 +240,7 @@ $col-gutter: 1.4rem !default;
 //
 // Compatibility untested.
 //
-// Styleguide 1.3.9
+// Styleguide 1.3.10.
 @mixin grid-overlay($custom-col-count: $col-count, $custom-col-gutter: $col-gutter-fluid, $overlay-color: rgba(#777, .1)) {
 	$column-width: get-column-width(1, $custom-col-count, $custom-col-gutter);
 	$gradient-string: $overlay-color 0, $overlay-color $column-width;
